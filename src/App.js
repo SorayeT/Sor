@@ -1,21 +1,21 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaTelegram, FaEnvelope, FaArrowDown, FaInstagram} from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTelegram, FaEnvelope, FaArrowDown, FaInstagram } from 'react-icons/fa';
 import Home from './components/Home';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
-import Contact from './components/Contact';
 import AboutMe from './components/AboutMe';
+import Contact from './components/Contact'; // Contact component imported
 import './App.css';
 
 const App = () => {
   document.title = 'Sor Portfolio';
+  
   const socialLinks = [
     { icon: <FaGithub />, url: "https://github.com/SorayeT", label: "GitHub" },
     { icon: <FaLinkedin />, url: "https://www.linkedin.com/in/soreti-tarekegn/", label: "LinkedIn" },
     { icon: <FaTelegram />, url: "https://t.me/Soranish", label: "Telegram" },
     { icon: <FaInstagram />, url: "https://instagram.com/soraye151/", label: "Instagram" },
     { icon: <FaEnvelope />, url: "mailto:sortarekegn08@gmail.com", label: "Email" }
-
   ];
 
   const navLinks = [
@@ -131,49 +131,9 @@ const App = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="contact-section">
-        <div className="glass-section">
-          <h2 className="section-title">Get In Touch</h2>
-          
-          <div className="contact-content">
-            <div className="contact-info">
-              <h3>Contact Information</h3>
-              <div className="contact-item">
-                <span>Mail Me:</span>
-                <a href="mailto:sortarekegn08@gmail.com" className="contact-link">sortarekegn08@gmail.com</a>
-              </div>
-              <div className="contact-item">
-                <span>Phone:</span>
-                <a href="tel:+251987386603" className="contact-link">+251987386603</a>
-              </div>
-              <div className="contact-item">
-                <span>Addis Ababa, Ethiopia</span>
-              </div>
-            </div>
-
-            <div className="divider"></div>
-
-            <form className="contact-form">
-              <div className="form-group">
-                <h3>Name</h3>
-                <input type="text" placeholder="Your name" />
-              </div>
-              
-              <div className="form-group">
-                <h3>Email</h3>
-                <input type="email" placeholder="Your email" />
-              </div>
-              
-              <div className="form-group">
-                <h3>Message</h3>
-                <textarea placeholder="Your message"></textarea>
-              </div>
-              
-              <button type="submit" className="submit-btn">Send Message</button>
-            </form>
-          </div>
-        </div>
+      {/* Contact Section - Using the imported Contact component */}
+      <section id="contact" className="section">
+        <Contact />
       </section>
     </div>
   );

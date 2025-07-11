@@ -17,7 +17,6 @@ const smoothScroll = (target) => {
 const Home = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [showContent, setShowContent] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [floatingElements, setFloatingElements] = useState([]);
   const [isScrolling, setIsScrolling] = useState(false);
@@ -62,7 +61,6 @@ const Home = () => {
 
     return () => {
       clearTimeout(welcomeTimer);
-      cancelAnimationFrame(animate);
     };
   }, []);
 
@@ -86,13 +84,14 @@ const Home = () => {
             }}
           />
         ))}
+        
       </div>
       {/* Animated Cursor */}
       <div className="animated-cursor" style={{
         left: `${cursorPosition.x}px`,
         top: `${cursorPosition.y}px`
       }}>
-        {isHovering && <FaMousePointer className="cursor-icon" />}
+        <FaMousePointer className="cursor-icon" />
       </div>
 
       {/* Hero Content */}

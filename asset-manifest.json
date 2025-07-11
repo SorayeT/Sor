@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/sor-portfolio/static/css/main.887e5bd7.css",
+    "main.js": "/sor-portfolio/static/js/main.7e3ec6ee.js",
+    "static/js/453.d3786b60.chunk.js": "/sor-portfolio/static/js/453.d3786b60.chunk.js",
+    "static/media/Sor grad.jpg": "/sor-portfolio/static/media/Sor grad.9b5398fe8bd3b2d59f72.jpg",
+    "static/media/coder.jpg": "/sor-portfolio/static/media/coder.380e55b0810b0dfe1aab.jpg",
+    "index.html": "/sor-portfolio/index.html",
+    "main.887e5bd7.css.map": "/sor-portfolio/static/css/main.887e5bd7.css.map",
+    "main.7e3ec6ee.js.map": "/sor-portfolio/static/js/main.7e3ec6ee.js.map",
+    "453.d3786b60.chunk.js.map": "/sor-portfolio/static/js/453.d3786b60.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.887e5bd7.css",
+    "static/js/main.7e3ec6ee.js"
+  ]
+}

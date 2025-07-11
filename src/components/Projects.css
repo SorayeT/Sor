@@ -67,7 +67,7 @@
 }
 
 .feature-description {
-    color: rgba(0, 0, 0, 0.8);
+    color: #211818;
     line-height: 1.6;
     margin-bottom: 20px;
     font-size: 1rem;
@@ -340,8 +340,33 @@
     }
     
     .portfolio-description {
-        padding: 1.5rem;
-    }
+        max-width: 800px;
+        margin: 0 auto 40px;
+        padding: 20px;
+        text-align: center;
+      }
+      
+      .portfolio-description p {
+        color: rgba(0, 0, 0, 0.85); /* This sets the text color */
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 20px;
+      }
+      
+      .feature-item {
+        background: rgba(108, 99, 255, 0.05);
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(108, 99, 255, 0.1);
+      }
+      
+      .feature-description {
+        color: rgba(0, 0, 0, 0.8);
+        line-height: 1.6;
+        margin-bottom: 20px;
+        font-size: 1rem;
+      }
     
     .section-description {
         font-size: 1.1rem;

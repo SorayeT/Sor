@@ -1,222 +1,120 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FaUser, FaBriefcase, FaGraduationCap, FaCertificate, FaTrophy, FaChevronLeft, FaChevronRight, FaUpload } from 'react-icons/fa';
+import React, { useRef } from 'react';
+import { FaUser, FaBriefcase, FaGraduationCap, FaCertificate, FaTrophy } from 'react-icons/fa';
 import './AboutMe.css';
+import profilePhoto from '../assets/Sor grad.jpg'; // Update this path
 
 const AboutMe = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentSkillsIndex, setCurrentSkillsIndex] = useState(0);
-  const [profileImage, setProfileImage] = useState(null);
-  const [imageSize, setImageSize] = useState({ width: 100, height: 100 });
-  const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef(null);
+  const aboutMeContainerRef = useRef(null);
+  const skillsRef = useRef(null);
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result);
-        setImageSize({ width: 100, height: 100 });
-        setImagePosition({ x: 0, y: 0 }); // Reset position on upload
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleResize = (e) => {
-    if (e.target.classList.contains('resize-handle')) {
-      const container = containerRef.current;
-      const containerRect = container.getBoundingClientRect();
-      const startX = e.clientX - containerRect.left;
-      const startY = e.clientY - containerRect.top;
-      
-      const handleMouseMove = (moveEvent) => {
-        const currentX = moveEvent.clientX - containerRect.left;
-        const currentY = moveEvent.clientY - containerRect.top;
-        
-        const newWidth = Math.max(10, Math.min(100, ((currentX - startX) / containerRect.width) * 100 + imageSize.width));
-        const newHeight = Math.max(10, Math.min(100, ((currentY - startY) / containerRect.height) * 100 + imageSize.height));
-        
-        setImageSize({ width: newWidth, height: newHeight });
-      };
-
-      const handleMouseUp = () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    }
-  };
-
-  const handleDragStart = (e) => {
-    if (e.target.classList.contains('profile-photo')) {
-      const container = containerRef.current;
-      const containerRect = container.getBoundingClientRect();
-      const startX = e.clientX - containerRect.left;
-      const startY = e.clientY - containerRect.top;
-      
-      const handleMouseMove = (moveEvent) => {
-        const currentX = moveEvent.clientX - containerRect.left;
-        const currentY = moveEvent.clientY - containerRect.top;
-        
-        const newX = Math.max(-50, Math.min(50, currentX - startX + imagePosition.x));
-        const newY = Math.max(-50, Math.min(50, currentY - startY + imagePosition.y));
-        
-        setImagePosition({ x: newX, y: newY });
-      };
-
-      const handleMouseUp = () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    }
-  };
-
-  const sections = [
+  const aboutMeData = [
     {
-      id: 1,
-      title: 'Who I Am',
       icon: <FaUser />,
-      content: 'A software engineer with a creative edge, combining development skills and digital marketing expertise to build functional, engaging digital experiences. Passionate about coding, problem-solving, and using marketing strategies to deliver results..'
+      title: 'Who I Am',
+      content: 'A software engineer with a creative edge, combining development skills and digital marketing expertise to build functional, engaging digital experiences. Passionate about coding, problem-solving, and using marketing strategies to deliver results.'
     },
     {
-      id: 2,
-      title: 'Professional Experience',
       icon: <FaBriefcase />,
+      title: 'Professional Experience',
       content: 'Full-stack developer and digital marketer with experience building scalable web apps and optimizing them for performance, usability, and conversion.'
     },
     {
-      id: 3,
-      title: 'Education',
       icon: <FaGraduationCap />,
+      title: 'Education',
       content: 'Software Engineering graduate passionate about full-stack development and data-driven marketing. Committed to lifelong learning to build cutting-edge, user-centric solutions.'
     },
     {
-      id: 4,
-      title: 'Certifications',
       icon: <FaCertificate />,
+      title: 'Certifications',
       content: 'Certified in leadership, Tech Field, and proven in competitive hackathons.'
     },
     {
-      id: 5,
-      title: 'Achievements',
       icon: <FaTrophy />,
+      title: 'Achievements',
       content: 'Top-ranked female Software Engineer (Dire Dawa University) celebrated for academic excellence, open-source contributions, and pioneering technical solutions.'
     }
   ];
 
-  const skills = [
-    'React', 'JavaScript', 'Node.js', 'HTML/CSS', 'SQL', 
+  const technicalSkills = [
+    'HTML/CSS', 'JavaScript', 'React', 'Node.js', 
+  
   ];
 
-  const nextSection = () => {
-    setCurrentIndex((prev) => (prev === sections.length - 1 ? 0 : prev + 1));
+  const scrollAbout = (direction) => {
+    if (aboutMeContainerRef.current) {
+      aboutMeContainerRef.current.scrollBy({
+        left: direction === 'left' ? -300 : 300,
+        behavior: 'smooth'
+      });
+    }
   };
 
-  const prevSection = () => {
-    setCurrentIndex((prev) => (prev === 0 ? sections.length - 1 : prev - 1));
-  };
-
-  const nextSkill = () => {
-    setCurrentSkillsIndex((prev) => (prev >= skills.length - 6 ? 0 : prev + 6));
-  };
-
-  const prevSkill = () => {
-    setCurrentSkillsIndex((prev) => (prev === 0 ? skills.length - 6 : prev - 6));
+  const scrollSkills = (direction) => {
+    if (skillsRef.current) {
+      skillsRef.current.scrollBy({
+        left: direction === 'left' ? -200 : 200,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
     <div className="about-me-section" id="about">
-      <div className="about-me-container">
-        <div className="about-me-cover">
+      <div className="about-me-header">
+      <div className="about-me-intro">
           <div className="profile-photo-container">
-            <div className="profile-photo-upload" ref={containerRef}>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="file-input"
-              />
-              {profileImage ? (
-                <div className="resizable-image-container">
-                  <img 
-                    src={profileImage} 
-                    alt="Profile" 
-                    className="profile-photo"
-                    style={{ 
-                      width: `${imageSize.width}%`, 
-                      height: `${imageSize.height}%`,
-                      transform: `translate(${imagePosition.x}px, ${imagePosition.y}px)`
-                    }}
-                    onMouseDown={handleDragStart}
-                  />
-                  <div className="resize-handle" onMouseDown={handleResize}>
-                    <FaUpload className="resize-icon" />
-                  </div>
-                </div>
-              ) : (
-                <div className="upload-placeholder">
-                  <FaUpload className="upload-icon" />
-                  <p>Choose Photo</p>
-                </div>
-              )}
-            </div>
+            <img src={profilePhoto} alt="Profile" className="profile-photo" />
           </div>
-          <div className="about-me-content">
-            <div className="about-me-header">
-              <h1 className="section-title">About Me</h1>
-              <p className="section-description">
-                Get to know me better through my journey and expertise
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="about-me-sections">
-          {sections.map((section) => (
-            <div className="about-me-section-box" key={section.id}>
-              <div className="section-icon">{section.icon}</div>
-              <h3>{section.title}</h3>
-              <p>{section.content}</p>
+        <h2 className="section-title">About Me</h2>
+        <p className="section-subtitle">Get to know me better through my journey and expertise</p>
+      </div>
+      </div>
+      <div className="about-me-container">
+        <button className="scroll-button left" onClick={() => scrollAbout('left')}>
+          &lt;
+        </button>
+        
+        <div className="about-me-scroll-container" ref={aboutMeContainerRef}>
+          {aboutMeData.map((item, index) => (
+            <div className="about-me-card" key={index}>
+              <div className="about-me-icon">{item.icon}</div>
+              <h3 className="about-me-title">{item.title}</h3>
+              <p className="about-me-content">{item.content}</p>
             </div>
           ))}
         </div>
+        
+        <button className="scroll-button right" onClick={() => scrollAbout('right')}>
+          &gt;
+        </button>
+      </div>
 
-        <div className="technical-skills">
-          <h3>Technical Skills</h3>
-          <div className="skills-carousel">
-            <button 
-              className="nav-arrow" 
-              onClick={prevSkill}
-              disabled={currentSkillsIndex === 0}
-            >
-              <FaChevronLeft />
-            </button>
-
-            <div className="skills-grid">
-              {skills.slice(currentSkillsIndex, currentSkillsIndex + 6).map((skill, index) => (
-                <div
-                  key={index}
-                  className={`skill-item ${index === 0 ? 'active' : ''}`}
-                >
-                  {skill}
-                </div>
-              ))}
-            </div>
-
-            <button 
-              className="nav-arrow" 
-              onClick={nextSkill}
-              disabled={currentSkillsIndex >= skills.length - 6}
-            >
-              <FaChevronRight />
-            </button>
+      {/* Technical Skills subsection */}
+      <div className="technical-skills-container">
+        <h3 className="skills-subheading">Technical Skills</h3>
+        
+        <div className="skills-scroller">
+          <button 
+            className="skill-scroll-btn left" 
+            onClick={() => scrollSkills('left')}
+          >
+            &lt;
+          </button>
+          
+          <div className="skills-list" ref={skillsRef}>
+            {technicalSkills.map((skill, index) => (
+              <div key={index} className="skill-pill">
+                {skill}
+              </div>
+            ))}
           </div>
+          
+          <button 
+            className="skill-scroll-btn right" 
+            onClick={() => scrollSkills('right')}
+          >
+            &gt;
+          </button>
         </div>
       </div>
     </div>

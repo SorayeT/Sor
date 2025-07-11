@@ -12,10 +12,7 @@ const smoothScroll = (target) => {
     });
   }
 };
-// Use it somewhere in your component
-<div>
-  <FaUser />  // ✅ Now it's being used
-</div>
+
 const Home = () => {
   const [showWelcome, setShowWelcome] = useState(true);
   const [showContent, setShowContent] = useState(false);
@@ -44,7 +41,7 @@ const Home = () => {
         speedX: Math.random() * 2 - 1,
         speedY: Math.random() * 2 - 1
       });
-    }
+     
     setFloatingElements(elements);
 
     // Animate floating elements

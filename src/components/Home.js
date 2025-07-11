@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FaChevronDown, FaMousePointer, FaUser } from 'react-icons/fa';
+import { FaChevronDown, FaMousePointer } from 'react-icons/fa';
 import './Home.css';
+
 
 // Smooth scroll function
 const smoothScroll = (target) => {
@@ -22,6 +23,8 @@ const Home = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
 
+   
+  
   useEffect(() => {
     // Welcome message timer
     const welcomeTimer = setTimeout(() => {
@@ -41,7 +44,7 @@ const Home = () => {
         speedX: Math.random() * 2 - 1,
         speedY: Math.random() * 2 - 1
       });
-     
+    }
     setFloatingElements(elements);
 
     // Animate floating elements
@@ -68,26 +71,22 @@ const Home = () => {
   };
 
   return (
-    <div 
-      className="home-container" 
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
+    <div className="home-container">
       {/* Floating Background Elements */}
-      {floatingElements.map((element) => (
-        <div
-          key={element.id}
-          className={`floating-element ${element.type}`}
-          style={{
-            width: `${element.size}px`,
-            height: `${element.size}px`,
-            top: `${element.y}px`,
-            left: `${element.x}px`,
-          }}
-        />
-      ))}
-
+      <div className="floating-background">
+        {floatingElements.map((element) => (
+          <div
+            key={element.id}
+            className={`floating-element ${element.type}`}
+            style={{
+              width: `${element.size}px`,
+              height: `${element.size}px`,
+              top: `${element.y}px`,
+              left: `${element.x}px`
+            }}
+          />
+        ))}
+      </div>
       {/* Animated Cursor */}
       <div className="animated-cursor" style={{
         left: `${cursorPosition.x}px`,
@@ -97,7 +96,7 @@ const Home = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="hero-section">
+      <div className="hero-section" style={{ zIndex: 10 }}>
         {/* Welcome Message (shows first) */}
         {showWelcome && (
           <div className="welcome-message-container">
@@ -176,6 +175,7 @@ const Home = () => {
             </div>
           </div>
         )}
+        
       </div>
     </div>
   );
